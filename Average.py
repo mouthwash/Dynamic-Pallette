@@ -33,8 +33,4 @@ def average(image):
     blue = blue/(length * width)
 
     average = [red,green,blue]
-    print average
-
-#DRIVER, TO BE EDITED OUT LATER
-image = Image.open("flower.jpg")
-average(image)
+    return average
