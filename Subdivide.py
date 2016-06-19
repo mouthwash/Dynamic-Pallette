@@ -12,8 +12,8 @@ def subdivide(image):
     x, y = image.size
 
     # Estimate how many subdivisions to use
-    x_SubE = x / 8
-    y_SubE = y / 8
+    x_SubE = x / 100
+    y_SubE = y / 100
 
     # Create number of subdivisions being used
     x_Sub = x / x_SubE
@@ -31,21 +31,22 @@ def subdivide(image):
         y_Splits.append(y_Splits[k - 1] + y_Sub)
 
     subdivisions = []
+    subVAL = []
 
-    for kx in range(len(x_Splits) - 1):
-        for ky in range(len(y_Splits) - 1):
+    for kx in range(len(x_Splits)):
+        for ky in range(len(y_Splits)):
             # x-values
             xUL = 0 + x_Splits[kx]
             xLR = xUL + (x_Splits[1] - x_Splits[0])
             # y - values
             yUL = 0 + y_Splits[ky]
-            yLR = yUL + (y_Splits[ky + 1] - y_Splits[ky])
+            yLR = yUL + (y_Splits[1] - y_Splits[0])
 
             sub = (xUL, yUL, xLR, yLR)
+            subVAL.append(sub)
             subdivisions.append(image.crop(sub))
 
-    print subdivisions
-
+    return subdivisions, subVAL
 
 if __name__ == '__main__':
     im = Image.open('temp.jpg')

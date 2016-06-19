@@ -1,41 +1,44 @@
 """ Dynamically illustrates color palette user selected GIF image"""
 
 
-from PIL import Image
+from PIL import Image, ImageDraw
 from Subdivide import subdivide
 from Average import average
 import math
 
-imName = raw_input('Enter Image Name')
+
+imName = raw_input('Enter Image Name ')
 im = Image.open(imName)
+base = im.size
 
-subdivisions = subdivide(im)
+subs, subsVAL = subdivide(im)
 
-for sub in subdivisions:
-    average(sub)
+subdivisions = []
+for sub in subs:
+    subdivisions.append(average(sub))
 
-subCopy = list(subdivisions)
 
-# Alan Zucconi Lumonosity Color Sort
-# Sort subdivisions based on luminosity
-def lum(r, g, b):
-    return math.sqrt((.241 * r) + (.691 * g) + (.068 * b))
+# # Alan Zucconi Lumonosity Color Sort
+# # Sort subdivisions based on luminosity
+# def lum(r, g, b):
+    # return math.sqrt((.241 * r) + (.691 * g) + (.068 * b))
 
-# 'List' Louis brightness sort method
-rgb = []
-for k in subCopy:
-    tmp = k.load()
-    r, g, b = tmp[25, 25]
-    rgb.append(r + g + b)
-rgb.sort()
+# Liszt 'List' Louis brightness sort method
+# rgb = []
+# for k in subdivisions:
+    # r, g, b = tmp[25, 25]
+    # rgb.append(r + g + b)
+# rgb.sort()
 
-nIM = Image.new()
-x0 = 0
-y0 = 0  # unchanging
-x1 = 20
-y1 = 10  # unchanging
+nIM = Image.new('RGBA', base, color=(0, 0, 0, 0))
+draw = ImageDraw.Draw(nIM)
 
-for k in len(rgb):
-    x0 += 10
-    y0 += 10
-    nIM.rectangle([x0, y0, x1, y1], fill=subCopy[k])
+for k in range(len(subs)):
+    r = subdivisions[k][0]
+    g = subdivisions[k][1]
+    b = subdivisions[k][2]
+    draw.rectangle(xy=subsVAL[k], fill=(r, g, b))
+
+print len(subdivisions)
+
+nIM.show()
