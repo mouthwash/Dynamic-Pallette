@@ -7,4 +7,4 @@ a color palette going left to right from darkest to brightest colors. Intended t
 ![alt tag](https://raw.githubusercontent.com/mouthwash/Dynamic-Pallette/master/cones.jpg)
 
 ##After
-![alt tag](https://db.tt/9cFxLpwo)
+![alt tag](https://raw.githubusercontent.com/mouthwash/Dynamic-Pallette/master/screenshots/Screen%20Shot%202016-06-19%20at%202.38.08%20AM.png)
