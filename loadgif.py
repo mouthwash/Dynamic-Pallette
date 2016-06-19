@@ -1,23 +1,39 @@
 from PIL import Image,GifImagePlugin
+import sys
+import os
 
 #Will load a GIF into its frames as a list of image files
-#Precond- accepts a gif image object
-#Postcond - will return a list of image objects with the frames of the gif in it
-def loadgif(gif):
-    #create empty gif list
-    giflist = []
-    num = 0
-    #Begin to seek frames and dump them into a
-    #list of images till failure
-    while not EOFError:
-        temp = gif
-        temp = temp.convert('RGB')
-        giflist.append(temp)
-        num = gif.tell() +1
+#Precond- accepts a name of a gif image
+#Postcond - will create a png file for each frame inside the gif
+def loadgif(giffile):
+    try:
+        im = Image.open(giffile)
 
-    return giflist
+    except IOError:
+        print "Load failed for" , giffile
+        sys.exit(1)
+
+    xnum = 0
+    try:
+        while True:
+            im.seek(im.tell()+1)
+            xum += 1
+
+    except EOFError:
+        pass
+
+    num = 0
+    try:
+        while True:
+            newim = Image.new('RGBA', im.size)
+            newim.paste(im)
+            newim.save(os.getcwd() + '/imFolder/img' + str(num) + '.png' , 'PNG')
+            num += 1
+            print str(num) + '/' + str(xnum)
+            im.seek(im.tell() +1)
+
+    except EOFError:
+        pass
 
 #DRIVER PROGRAM TO BE REMOVED LATER
-gif = Image.open('day.gif')
-somelist = loadgif(gif)
-somelist[0].show()
+loadgif('day.gif')
