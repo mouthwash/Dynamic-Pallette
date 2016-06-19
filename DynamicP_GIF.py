@@ -6,7 +6,7 @@ from Subdivide import subdivide
 from Average import average
 from Selection import selection
 from images2gif import writeGif
-from LoadGif import loadgif
+from loadgif import loadgif
 import math
 import os
 
@@ -30,8 +30,18 @@ def main():
 
     currentdir = os.getcwd()
     imFolder = os.listdir(currentdir + '/imFolder')
+
+    def numKeySort(fileName):
+        key_img_rem  = fileName[3:]
+        key_png_rem = key_img_rem[:len(key_img_rem) - 4]
+        key_png_rem = int(key_png_rem)
+        return key_png_rem
+
+    imFolder.sort(key=numKeySort)
+    print imFolder
+
     for file in imFolder:
-        imPaletteSave(file, currentFrame)
+        imPaletteSave(os.getcwd() + '/imFolder/' + file, currentFrame)
         currentFrame += 1
         print str(currentFrame) + '/' + str(frameNum)
 
@@ -39,7 +49,6 @@ def imPaletteSave(imName, num):
     im = Image.open(imName)
     base = im.size
     im = im.convert('RGB')
-    im.seek(0)
 
     subs, subsVAL = subdivide(im)
 
@@ -75,7 +84,6 @@ def imPaletteSave(imName, num):
         x0 += iter
 
     del draw
-    nIM.show()
     nIM.save(os.getcwd() + '/palFolder/img' + str(num) + '.png', 'PNG')
 
 
