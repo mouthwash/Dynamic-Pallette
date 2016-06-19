@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw
 from Subdivide import subdivide
 from Average import average
 from Selection import selection
-from images2gif import writeGif
+from img2gif import img2gif
 from loadgif import loadgif
 import math
 import os
@@ -37,6 +37,8 @@ def main():
         key_png_rem = int(key_png_rem)
         return key_png_rem
 
+    if imFolder[0][0] == '.':
+        imFolder.pop(0)
     imFolder.sort(key=numKeySort)
     print imFolder
 
@@ -44,6 +46,9 @@ def main():
         imPaletteSave(os.getcwd() + '/imFolder/' + file, currentFrame)
         currentFrame += 1
         print str(currentFrame) + '/' + str(frameNum)
+
+    palImages = [Image.open(os.getcwd() + '/palFolder/' + fn) for fn in imFolder]
+    img2gif('output.gif', palImages)
 
 def imPaletteSave(imName, num):
     im = Image.open(imName)
