@@ -18,10 +18,14 @@ for sub in subs:
     subdivisions.append(average(sub))
 
 
-# # Alan Zucconi Lumonosity Color Sort
-# # Sort subdivisions based on luminosity
-# def lum(r, g, b):
-    # return math.sqrt((.241 * r) + (.691 * g) + (.068 * b))
+
+subSorted = list(subdivisions)
+# Alan Zucconi Lumonosity Color Sort
+# Sort subdivisions based on luminosity
+def lum(r, g, b):
+    return math.sqrt((.241 * r) + (.691 * g) + (.068 * b))
+subSorted.sort(key=lambda rgb: lum(*rgb))
+print subSorted
 
 # Liszt 'List' Louis brightness sort method
 # rgb = []
