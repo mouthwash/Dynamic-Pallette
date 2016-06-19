@@ -5,12 +5,37 @@ from PIL import Image, ImageDraw
 from Subdivide import subdivide
 from Average import average
 from Selection import selection
+from images2gif import writeGif
+from LoadGif import loadgif
 import math
+import os
 
 def main():
     """"""
 
     imName = raw_input('Enter GIF file ')
+    tmpIm = Image.open(imName)
+
+    # calculate number of frames in GIF to show render progress
+    frameNum = 0
+    currentFrame = 0
+    try:
+        while True:
+            tmpIm.seek(tmpIm.tell() + 1)
+            frameNum += 1
+    except EOFError:
+        pass
+
+    loadgif(imName)
+
+    currentdir = os.getcwd()
+    imFolder = os.listdir(currentdir + '/imFolder')
+    for file in imFolder:
+        imPaletteSave(file, currentFrame)
+        currentFrame += 1
+        print str(currentFrame) + '/' + str(frameNum)
+
+def imPaletteSave(imName, num):
     im = Image.open(imName)
     base = im.size
     im = im.convert('RGB')
@@ -51,6 +76,7 @@ def main():
 
     del draw
     nIM.show()
+    nIM.save(os.getcwd() + '/palFolder/img' + str(num) + '.png', 'PNG')
 
 
 if __name__ == '__main__':
