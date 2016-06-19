@@ -16,12 +16,13 @@ def loadgif(giffile):
     xnum = 0
     try:
         while True:
-            im.seek(im.tell()+1)
-            xum += 1
+            im.seek(im.tell() + 1)
+            xnum += 1
 
     except EOFError:
         pass
 
+    im.seek(0)
     num = 0
     try:
         while True:
@@ -30,10 +31,7 @@ def loadgif(giffile):
             newim.save(os.getcwd() + '/imFolder/img' + str(num) + '.png' , 'PNG')
             num += 1
             print str(num) + '/' + str(xnum)
-            im.seek(im.tell() +1)
+            im.seek(im.tell() + 1)
 
     except EOFError:
         pass
-
-#DRIVER PROGRAM TO BE REMOVED LATER
-loadgif('day.gif')
