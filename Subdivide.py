@@ -12,22 +12,18 @@ def subdivide(image):
     x, y = image.size
 
     # Estimate how many subdivisions to use
-    x_SubE = x / 100
-    y_SubE = y / 100
-
-    # Create number of subdivisions being used
-    x_Sub = x / x_SubE
-    y_Sub = y / y_SubE
+    x_Sub = x / 40
+    y_Sub = y / 40
 
     # Create 2 lists holding x and y values for points at
     # subdivisions
     x_Splits = [0]
     y_Splits = [0]
 
-    for k in range(1, x_SubE):
+    for k in range(1, 40):
         x_Splits.append(x_Splits[k - 1] + x_Sub)
 
-    for k in range(1, y_SubE):
+    for k in range(1, 40):
         y_Splits.append(y_Splits[k - 1] + y_Sub)
 
     subdivisions = []

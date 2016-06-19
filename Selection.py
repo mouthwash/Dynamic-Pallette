@@ -6,6 +6,7 @@ from numpy import linspace
 #Postcond- A list of 8 color tuples that range from darkest to lightest
 def selection(colorlist):
     #create a list with only the tuples we wish to pull from
+    print colorlist
     slist = []
     interval = len(colorlist) / 8
     for num in range(len(colorlist)):
