@@ -34,11 +34,6 @@ nIM = Image.new('RGBA', base, color=(0, 0, 0, 0))
 draw = ImageDraw.Draw(nIM)
 
 for k in range(len(subs)):
-    r = subdivisions[k][0]
-    g = subdivisions[k][1]
-    b = subdivisions[k][2]
-    draw.rectangle(xy=subsVAL[k], fill=(r, g, b))
-
-print len(subdivisions)
+    draw.rectangle(xy=subsVAL[k], fill=subdivisions[k])
 
 nIM.show()
