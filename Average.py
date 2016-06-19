@@ -32,5 +32,5 @@ def average(image):
     green = green/(length * width)
     blue = blue/(length * width)
 
-    average = [red,green,blue]
+    average = (red,green,blue)
     return average
